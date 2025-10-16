@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: heroku-app
+    runtime: docker
+    plan: free
+    buildCommand: chmod +x mvnw && ./mvnw clean install -DskipTests
+    startCommand: java -Dserver.port=$PORT -jar target/*.jar
