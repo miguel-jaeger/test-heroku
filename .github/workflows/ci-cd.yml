@@ -1,39 +1,39 @@
 name: CI/CD Pipeline
 
 on:
-    push:
-        branches: [main, master]
-    pull_request:
-        branches: [main, master]
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
 
 jobs:
-    test:
-        runs-on: ubuntu-latest
-        name: Run Tests
+  test:
+    runs-on: ubuntu-latest
+    name: Run Tests
 
-        steps:
-            - uses: actions/checkout@v3
+    steps:
+      - uses: actions/checkout@v3
 
-            - name: Set up JDK 21
-              uses: actions/setup-java@v3
-              with:
-                  java-version: "21"
-                  distribution: "temurin"
-                  cache: maven
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: "21"
+          distribution: "temurin"
+          cache: maven
 
-            - name: Run tests with Maven
-              run: mvn test
+      - name: Run tests with Maven
+        run: cd heroku && mvn test
 
-            - name: Build with Maven
-              run: mvn clean install -DskipTests
+      - name: Build with Maven
+        run: cd heroku && mvn clean install -DskipTests
 
-    deploy:
-        needs: test
-        runs-on: ubuntu-latest
-        name: Deploy to Render
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    name: Deploy to Render
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
 
-        steps:
-            - name: Trigger Render Deploy
-              run: |
-                  curl -X POST ${{ secrets.RENDER_API_KEY }}
+    steps:
+      - name: Trigger Render Deploy
+        run: |
+          curl -X POST ${{ secrets.RENDER_API_KEY }}
