@@ -9,6 +9,6 @@ public class StatusController {
 
     @GetMapping("/status")
     public ResponseEntity<String> status() {
-        return ResponseEntity.ok("OK");
+        return ResponseEntity.ok("Error");
     }
 }
