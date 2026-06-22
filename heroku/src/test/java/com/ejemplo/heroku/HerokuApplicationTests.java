@@ -21,7 +21,7 @@ class HerokuApplicationTests {
     void statusEndpointShouldReturnOK() throws Exception {
         mockMvc.perform(get("/status"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("OK"));
+                .andExpect(content().string("Ok"));
     }
 
 }
