@@ -16,7 +16,7 @@ public class StatusController {
     @GetMapping
     public ResponseEntity<StatusResponse> getStatus() {
         StatusResponse response = new StatusResponse(
-                "Up",
+                "UP",
                 "New-message",
                 Instant.now()
         );
