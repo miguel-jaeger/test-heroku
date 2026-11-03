@@ -23,8 +23,13 @@ class StatusControllerTest {
         mockMvc.perform(get("/status")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.status").value("UP"))
+            // CORRECT
+               // .andExpect(jsonPath("$.status").value("UP"))
+            // INCORRECT
+                .andExpect(jsonPath("$.status").value("DOWN"))
                 .andExpect(jsonPath("$.message").value("Ok-message"))
                 .andExpect(jsonPath("$.timestamp").exists());
+
+         
     }
 }
