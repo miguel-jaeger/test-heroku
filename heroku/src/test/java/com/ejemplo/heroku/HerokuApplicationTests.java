@@ -27,7 +27,7 @@ class StatusControllerTest {
                 .andExpect(jsonPath("$.status").value("UP"))
             // INCORRECT
                // .andExpect(jsonPath("$.status").value("DOWN"))
-                .andExpect(jsonPath("$.message").value("Ok-message"))
+                .andExpect(jsonPath("$.message").value("New-message"))
                 .andExpect(jsonPath("$.timestamp").exists());
 
          
